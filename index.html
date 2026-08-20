@@ -231,13 +231,14 @@
 
   <script>
     // Điền 52 Khu phố tự động
+    const khuPho=["Chánh Thi",  "Hiệp Thành",  "Chánh An",  "Phước An",  "Phú Thuận",  "Phú Hữu",  "Chợ Đình",  "Phú Bình",  "Vinh Sơn",  "Phú Văn",  "Phú Hoà",  "Bình Thoại",  "Hoà Thạnh",  "Bình Điềm"];
     const kpSelect = document.getElementById("khuPho");
-    for (let i = 1; i <= 52; i++) {
-      kpSelect.innerHTML += `<option value="Chi bộ / Khu phố ${i}">Chi bộ / Khu phố ${i}</option>`;
+    for (let i = 1; i <= khuPho.length; i++) {
+      kpSelect.innerHTML += `<option value="${khuPho[i]}">${khuPho[i]}</option>`;
     }
 
     // Xử lý gửi form
-    const SCRIPT_URL = "THAY_BANG_GOOGLE_WEB_APP_URL"; // URL Web App của Google Apps Script
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA9HCucg7qHjNmtLHZXMQPchVGg_GDWDmUkMHM4I6-RpTes1IK2VFAfY1dr3MFNpaf/exec"; // URL Web App của Google Apps Script
 
     document.getElementById("healthForm").addEventListener("submit", async function(e) {
       e.preventDefault();
