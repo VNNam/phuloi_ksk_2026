@@ -77,9 +77,9 @@
             
             <div>
               <label class="block font-semibold mb-1">Số CCCD/Mã số định danh <span class="text-red-500">*</span></label>
-              <input type="text" id="cccd" required pattern="\d{12}" maxlength="12" minlength="12" title="Vui lòng nhập đúng 12 chữ số CCCD (ví dụ: 079123456789)" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="cccd" required pattern="\d{12}" maxlength="12" minlength="12" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors">
+              <p id="cccdError" class="text-red-500 text-sm mt-1 hidden">Vui lòng nhập đúng 12 chữ số!</p>
             </div>
-
             <div>
               <label class="block font-semibold mb-1">Số thẻ BHYT</label>
               <input type="text" id="bhyt" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
@@ -247,6 +247,41 @@
     // Xử lý gửi form
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA9HCucg7qHjNmtLHZXMQPchVGg_GDWDmUkMHM4I6-RpTes1IK2VFAfY1dr3MFNpaf/exec"; // URL Web App của Google Apps Script
 
+    const cccdInput = document.getElementById("cccd");
+    const cccdError = document.getElementById("cccdError");
+    
+    cccdInput.addEventListener("blur", function() {
+      const value = this.value.trim();
+      const cccdRegex = /^\d{12}$/;
+      
+      // Bỏ qua kiểm tra nếu ô đang trống (đã có thuộc tính 'required' lo khi submit)
+      if (value === "") {
+        clearError();
+        return;
+      }
+    
+      // Nếu nhập sai định dạng
+      if (!cccdRegex.test(value)) {
+        // Đổi viền sang màu đỏ và hiện câu cảnh báo
+        this.classList.remove("border-gray-300", "focus:ring-blue-500");
+        this.classList.add("border-red-500", "focus:ring-red-500");
+        cccdError.classList.remove("hidden");
+      } else {
+        clearError();
+      }
+    });
+    
+    // Hàm dọn dẹp cảnh báo khi nhập đúng
+    function clearError() {
+      cccdInput.classList.remove("border-red-500", "focus:ring-red-500");
+      cccdInput.classList.add("border-gray-300", "focus:ring-blue-500");
+      cccdError.classList.add("hidden");
+    }
+    
+    // Tùy chọn thêm: Xoá cảnh báo ngay khi người dùng bắt đầu gõ lại
+    cccdInput.addEventListener("input", function() {
+      clearError();
+    });
     document.getElementById("healthForm").addEventListener("submit", async function(e) {
       e.preventDefault();
       // 1. Kiểm tra Validate CCCD
@@ -357,6 +392,7 @@
         btn.innerText = "XÁC NHẬN GỬI THÔNG TIN";
       }
     });
+    
   </script>
 </body>
 </html>
