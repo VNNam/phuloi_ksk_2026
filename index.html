@@ -233,7 +233,7 @@
     // Điền 52 Khu phố tự động
     const khuPho=["Chánh Thi",  "Hiệp Thành",  "Chánh An",  "Phước An",  "Phú Thuận",  "Phú Hữu",  "Chợ Đình",  "Phú Bình",  "Vinh Sơn",  "Phú Văn",  "Phú Hoà",  "Bình Thoại",  "Hoà Thạnh",  "Bình Điềm"];
     const kpSelect = document.getElementById("khuPho");
-    for (let i = 1; i <= khuPho.length; i++) {
+    for (let i = 1; i < khuPho.length; i++) {
       kpSelect.innerHTML += `<option value="${khuPho[i]}">${khuPho[i]}</option>`;
     }
 
