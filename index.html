@@ -62,7 +62,8 @@
               <label class="block font-semibold mb-1">Dân tộc</label>
               <select id="danToc" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 <option value="">-- Chọn --</option>
-                <option value="Kinh">Kinh</option><option value="Tày">Tày</option><option value="Thái">Thái</option><option value="Mường">Mường</option><option value="Khơ-me">Khơ-me</option><option value="Hoa">Hoa</option><option value="Nùng">Nùng</option><option value="H'Mông">H'Mông</option><option value="Dao">Dao</option><option value="Gia-rai">Gia-rai</option><option value="Khác">Khác...</option>
+                <!-- Render bằng JS -->
+                <!-- <option value="Kinh">Kinh</option><option value="Tày">Tày</option><option value="Thái">Thái</option><option value="Mường">Mường</option><option value="Khơ-me">Khơ-me</option><option value="Hoa">Hoa</option><option value="Nùng">Nùng</option><option value="H'Mông">H'Mông</option><option value="Dao">Dao</option><option value="Gia-rai">Gia-rai</option><option value="Khác">Khác...</option> -->
               </select>
             </div>
 
@@ -232,9 +233,15 @@
   <script>
     // Điền 52 Khu phố tự động
     const khuPho=["Chánh Thi",  "Hiệp Thành",  "Chánh An",  "Phước An",  "Phú Thuận",  "Phú Hữu",  "Chợ Đình",  "Phú Bình",  "Vinh Sơn",  "Phú Văn",  "Phú Hoà",  "Bình Thoại",  "Hoà Thạnh",  "Bình Điềm"];
+    const danToc=["Kinh (Việt)","Tày","Thái","Mường","Hoa (Hán)","Khơ-me","Nùng","HMông (Mèo)","Dao","Gia-rai","Ê-đê","Ba-na","Sán Chay","(Cao lan - Sán chỉ)","Chăm (chàm)","Xơ-đăng","Sán Dìu","Hrê","Cơ-ho","Ra-glai","Mnông","Thổ","Xtiêng","Khơmú","Bru-Vân Kiều","Giáy","Cơ-tu","Gié-Triêng","Ta-ôi","Mạ","Co","Chơ-ro","Hà Nhì","Xinh-mun","Chu-ru","Lào","La-chí","Phù Lá","La Hủ","Kháng","Lự","Pà Thẻn","LôLô","Chứt","Mảng","Cờ lao","Bố Y","La Ha","Cống","Ngái","Si La","Pu Péo","Brâu","Rơ-măm","Ơ-đu"
+];
     const kpSelect = document.getElementById("khuPho");
+    const dtSelect = document.getElementById("danToc");
     for (let i = 1; i < khuPho.length; i++) {
       kpSelect.innerHTML += `<option value="${khuPho[i]}">${khuPho[i]}</option>`;
+    }
+    for (let i = 1; i < danToc.length; i++) {
+      dtSelect.innerHTML += `<option value="${danToc[i]}">${danToc[i]}</option>`;
     }
 
     // Xử lý gửi form
