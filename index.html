@@ -237,10 +237,10 @@
 ];
     const kpSelect = document.getElementById("khuPho");
     const dtSelect = document.getElementById("danToc");
-    for (let i = 1; i < khuPho.length; i++) {
+    for (let i = 0; i < khuPho.length; i++) {
       kpSelect.innerHTML += `<option value="${khuPho[i]}">${khuPho[i]}</option>`;
     }
-    for (let i = 1; i < danToc.length; i++) {
+    for (let i = 0; i < danToc.length; i++) {
       dtSelect.innerHTML += `<option value="${danToc[i]}">${danToc[i]}</option>`;
     }
 
