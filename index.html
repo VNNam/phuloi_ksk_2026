@@ -6,9 +6,8 @@
   <title>Phiếu thông tin khám sức khỏe năm 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Tuỳ chỉnh một chút cho scrollbar và checkbox */
     input[type="checkbox"], input[type="radio"] {
-      accent-color: #1e3a8a; /* Xanh đậm */
+      accent-color: #1e3a8a;
       width: 1.25rem;
       height: 1.25rem;
     }
@@ -18,19 +17,15 @@
 
   <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
     
-    <!-- Header -->
     <div class="bg-blue-900 text-white text-center py-6 px-4">
       <h2 class="text-sm font-semibold uppercase tracking-wider text-blue-200">Ủy ban nhân dân phường Phú Lợi - Trạm y tế</h2>
       <h1 class="text-2xl md:text-3xl font-bold mt-2">Phiếu thông tin khám sức khỏe năm 2026</h1>
     </div>
 
-    <!-- Hướng dẫn & Cam kết -->
     <div class="bg-blue-50 border-b border-blue-100 p-6 text-sm text-gray-700">
       <p><strong>Cam kết:</strong> Thông tin của Quý vị được bảo mật tuyệt đối và chỉ sử dụng cho mục đích lập hồ sơ khám sức khỏe năm 2026.</p>
-      <!-- <p class="mt-2"><strong>Cần hỗ trợ điền thông tin?</strong> Liên hệ Trạm Y tế phường An Lạc. (Đồng chí Lê Thị Mỹ Ngọc, Trưởng Khoa Phòng bệnh, An toàn thực phẩm - <strong>0394984163</strong>)</p> -->
     </div>
 
-    <!-- Form chính -->
     <form id="healthForm" class="p-6 md:p-8 space-y-8">
       
       <!-- PHẦN I -->
@@ -38,7 +33,6 @@
         <h3 class="text-xl font-bold text-blue-900 border-b-2 border-blue-900 pb-2 mb-6">I. Thông tin hành chính</h3>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Cột 1 -->
           <div class="space-y-6">
             <div>
               <label class="block font-semibold mb-1">Họ và tên (viết chữ in hoa) <span class="text-red-500">*</span></label>
@@ -62,8 +56,6 @@
               <label class="block font-semibold mb-1">Dân tộc</label>
               <select id="danToc" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 <option value="">-- Chọn --</option>
-                <!-- Render bằng JS -->
-                <!-- <option value="Kinh">Kinh</option><option value="Tày">Tày</option><option value="Thái">Thái</option><option value="Mường">Mường</option><option value="Khơ-me">Khơ-me</option><option value="Hoa">Hoa</option><option value="Nùng">Nùng</option><option value="H'Mông">H'Mông</option><option value="Dao">Dao</option><option value="Gia-rai">Gia-rai</option><option value="Khác">Khác...</option> -->
               </select>
             </div>
 
@@ -86,7 +78,6 @@
             </div>
           </div>
 
-          <!-- Cột 2 -->
           <div class="space-y-6">
             <div>
               <label class="block font-semibold mb-1">Số nhà, đường (nơi ở hiện tại) <span class="text-red-500">*</span></label>
@@ -97,7 +88,6 @@
               <label class="block font-semibold mb-1">Khu phố <span class="text-red-500">*</span></label>
               <select id="khuPho" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 <option value="">-- Chọn khu phố --</option>
-                <!-- Render bằng JS -->
               </select>
             </div>
 
@@ -117,7 +107,7 @@
             </div>
 
             <div>
-              <label class="block font-semibold mb-1">Họ tên mẹ hoặc người giám hộ <span class="text-sm font-normal text-gray-500">(đối với trẻ <= 16 tuổi)</span></label>
+              <label class="block font-semibold mb-1">Họ tên mẹ hoặc người giám hộ <span class="text-sm font-normal text-gray-500">(đối với trẻ &lt;= 16 tuổi)</span></label>
               <input type="text" id="nguoiGiamHo" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
 
@@ -156,11 +146,11 @@
           </div>
           <div>
             <div class="mt-3 flex items-center gap-3 border rounded-lg p-3">
-              <input type="checkbox" id="chkKhacHinhThuc" value="Khác">
+              <!-- ĐÃ FIX ID TẠI ĐÂY -->
+              <input type="checkbox" id="chkKhacBenhLy" value="Khác">
               <span class="whitespace-nowrap">Khác, ghi rõ:</span>
-              <input type="text" id="hinhThucKhac" class="w-full border-b focus:outline-none focus:border-blue-500 transition-colors" placeholder="...">
+              <input type="text" id="tienSuKhac" class="w-full border-b focus:outline-none focus:border-blue-500 transition-colors" placeholder="...">
             </div>
-            <p id="hinhThucKhacError" class="text-red-500 text-sm mt-1 hidden">Vui lòng nhập rõ hình thức khám (ít nhất 3 ký tự)!</p>
           </div>
         </div>
 
@@ -187,10 +177,13 @@
             <label class="flex items-center gap-3 border rounded-lg p-3 cursor-pointer hover:bg-gray-50"><input type="checkbox" name="hinhThucKham" value="Khám sàng lọc - Ung thư đại trực tràng"> Khám sàng lọc - Ung thư đại trực tràng</label>
             <label class="flex items-center gap-3 border rounded-lg p-3 cursor-pointer hover:bg-gray-50"><input type="checkbox" name="hinhThucKham" value="Khám sàng lọc - Ung thư tiền liệt tuyến"> Khám sàng lọc - Ung thư tiền liệt tuyến</label>
           </div>
-          <div class="mt-3 flex items-center gap-3 border rounded-lg p-3">
-            <input type="checkbox" id="chkKhacHinhThuc" value="Khác">
-            <span class="whitespace-nowrap">Khác, ghi rõ:</span>
-            <input type="text" id="hinhThucKhac" class="w-full border-b focus:outline-none focus:border-blue-500" placeholder="...">
+          <div>
+            <div class="mt-3 flex items-center gap-3 border rounded-lg p-3">
+              <input type="checkbox" id="chkKhacHinhThuc" value="Khác">
+              <span class="whitespace-nowrap">Khác, ghi rõ:</span>
+              <input type="text" id="hinhThucKhac" class="w-full border-b focus:outline-none focus:border-blue-500 transition-colors" placeholder="...">
+            </div>
+            <p id="hinhThucKhacError" class="text-red-500 text-sm mt-1 hidden">Vui lòng nhập rõ hình thức khám (ít nhất 3 ký tự)!</p>
           </div>
         </div>
 
@@ -234,12 +227,13 @@
   </div>
 
   <script>
-    // Điền 52 Khu phố tự động
-    const khuPho=["Chánh Thiện",  "Hiệp Thành",  "Chánh An",  "Phước An",  "Phú Thuận",  "Phú Hữu",  "Chợ Đình",  "Phú Bình",  "Vinh Sơn",  "Phú Văn",  "Phú Hoà",  "Bình Thoại",  "Hoà Thạnh",  "Bình Điềm"];
-    const danToc=["Kinh (Việt)","Tày","Thái","Mường","Hoa (Hán)","Khơ-me","Nùng","HMông (Mèo)","Dao","Gia-rai","Ê-đê","Ba-na","Sán Chay","(Cao lan - Sán chỉ)","Chăm (chàm)","Xơ-đăng","Sán Dìu","Hrê","Cơ-ho","Ra-glai","Mnông","Thổ","Xtiêng","Khơmú","Bru-Vân Kiều","Giáy","Cơ-tu","Gié-Triêng","Ta-ôi","Mạ","Co","Chơ-ro","Hà Nhì","Xinh-mun","Chu-ru","Lào","La-chí","Phù Lá","La Hủ","Kháng","Lự","Pà Thẻn","LôLô","Chứt","Mảng","Cờ lao","Bố Y","La Ha","Cống","Ngái","Si La","Pu Péo","Brâu","Rơ-măm","Ơ-đu"
-];
+    // Điền danh sách Khu phố / Dân tộc
+    const khuPho = ["Chánh Thiện", "Hiệp Thành", "Chánh An", "Phước An", "Phú Thuận", "Phú Hữu", "Chợ Đình", "Phú Bình", "Vinh Sơn", "Phú Văn", "Phú Hoà", "Bình Thoại", "Hoà Thạnh", "Bình Điềm"];
+    const danToc = ["Kinh (Việt)","Tày","Thái","Mường","Hoa (Hán)","Khơ-me","Nùng","HMông (Mèo)","Dao","Gia-rai","Ê-đê","Ba-na","Sán Chay","(Cao lan - Sán chỉ)","Chăm (chàm)","Xơ-đăng","Sán Dìu","Hrê","Cơ-ho","Ra-glai","Mnông","Thổ","Xtiêng","Khơmú","Bru-Vân Kiều","Giáy","Cơ-tu","Gié-Triêng","Ta-ôi","Mạ","Co","Chơ-ro","Hà Nhì","Xinh-mun","Chu-ru","Lào","La-chí","Phù Lá","La Hủ","Kháng","Lự","Pà Thẻn","LôLô","Chứt","Mảng","Cờ lao","Bố Y","La Ha","Cống","Ngái","Si La","Pu Péo","Brâu","Rơ-măm","Ơ-đu"];
+    
     const kpSelect = document.getElementById("khuPho");
     const dtSelect = document.getElementById("danToc");
+    
     for (let i = 0; i < khuPho.length; i++) {
       kpSelect.innerHTML += `<option value="${khuPho[i]}">${khuPho[i]}</option>`;
     }
@@ -247,25 +241,21 @@
       dtSelect.innerHTML += `<option value="${danToc[i]}">${danToc[i]}</option>`;
     }
 
-    // Xử lý gửi form
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA9HCucg7qHjNmtLHZXMQPchVGg_GDWDmUkMHM4I6-RpTes1IK2VFAfY1dr3MFNpaf/exec"; // URL Web App của Google Apps Script
+    // Cấu hình URL Web App
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA9HCucg7qHjNmtLHZXMQPchVGg_GDWDmUkMHM4I6-RpTes1IK2VFAfY1dr3MFNpaf/exec";
 
+    // Validate CCCD
     const cccdInput = document.getElementById("cccd");
     const cccdError = document.getElementById("cccdError");
     
     cccdInput.addEventListener("blur", function() {
       const value = this.value.trim();
       const cccdRegex = /^\d{12}$/;
-      
-      // Bỏ qua kiểm tra nếu ô đang trống (đã có thuộc tính 'required' lo khi submit)
       if (value === "") {
         clearError();
         return;
       }
-    
-      // Nếu nhập sai định dạng
       if (!cccdRegex.test(value)) {
-        // Đổi viền sang màu đỏ và hiện câu cảnh báo
         this.classList.remove("border-gray-300", "focus:ring-blue-500");
         this.classList.add("border-red-500", "focus:ring-red-500");
         cccdError.classList.remove("hidden");
@@ -274,31 +264,25 @@
       }
     });
     
-    // Hàm dọn dẹp cảnh báo khi nhập đúng
     function clearError() {
       cccdInput.classList.remove("border-red-500", "focus:ring-red-500");
       cccdInput.classList.add("border-gray-300", "focus:ring-blue-500");
       cccdError.classList.add("hidden");
     }
     
-    // Tùy chọn thêm: Xoá cảnh báo ngay khi người dùng bắt đầu gõ lại
-    cccdInput.addEventListener("input", function() {
-      clearError();
-    });
+    cccdInput.addEventListener("input", clearError);
 
-    // --- Xử lý sự kiện cho ô Hình thức khám Khác ---
+    // Xử lý sự kiện cho ô Hình thức khám Khác
     const chkKhac = document.getElementById("chkKhacHinhThuc");
     const inputKhac = document.getElementById("hinhThucKhac");
     const errorKhac = document.getElementById("hinhThucKhacError");
     
-    // Hàm xoá cảnh báo đỏ
     function clearKhacError() {
       inputKhac.classList.remove("border-red-500", "focus:border-red-500");
       inputKhac.classList.add("focus:border-blue-500");
       errorKhac.classList.add("hidden");
     }
     
-    // Kiểm tra khi vừa nhập xong và nhấp chuột ra ngoài
     inputKhac.addEventListener("blur", function() {
       if (chkKhac.checked && this.value.trim().length <= 2) {
         this.classList.add("border-red-500", "focus:border-red-500");
@@ -308,79 +292,71 @@
       }
     });
     
-    // Xoá đỏ ngay khi đang gõ chữ
     inputKhac.addEventListener("input", function() {
       clearKhacError();
-      // Tự động tick vào ô checkbox nếu người dùng bắt đầu gõ vào ô input
       if (this.value.trim().length > 0 && !chkKhac.checked) {
         chkKhac.checked = true;
       }
     });
     
-    // Xử lý khi tick/bỏ tick ô Checkbox
     chkKhac.addEventListener("change", function() {
       if (this.checked) {
-        inputKhac.focus(); // Tự động trỏ chuột vào ô nhập khi tick
+        inputKhac.focus();
       } else {
-        clearKhacError(); // Bỏ tick thì xoá lỗi luôn
-        // inputKhac.value = ""; // (Tuỳ chọn) Bỏ tick thì xoá luôn chữ đã nhập
+        clearKhacError();
       }
     });
     
+    // XỬ LÝ GỬI FORM (ĐÃ SỬA LỖI TRÙNG BIẾN CONST)
     document.getElementById("healthForm").addEventListener("submit", async function(e) {
       e.preventDefault();
-      // 1. Kiểm tra Validate CCCD
-      const cccdValue = document.getElementById("cccd").value.trim();
-      const cccdRegex = /^\d{12}$/; // Bắt buộc đúng 12 chữ số từ 0-9
       
+      // 1. Kiểm tra Validate CCCD
+      const cccdValue = cccdInput.value.trim();
+      const cccdRegex = /^\d{12}$/;
       if (!cccdRegex.test(cccdValue)) {
         alert("Số CCCD/Mã định danh không hợp lệ. Vui lòng nhập đúng 12 chữ số!");
-        document.getElementById("cccd").focus();
-        return; // Dừng việc gửi form
+        cccdInput.focus();
+        return;
       }
       
-      // --- Nằm trong sự kiện "submit" ---
-      const isKhacHinhThuc = document.getElementById("chkKhacHinhThuc").checked;
-      const hinhThucKhacValue = document.getElementById("hinhThucKhac").value.trim();
+      // 2. Validate hình thức khám khác
+      const isKhacHinhThuc = chkKhac.checked; // <--- Chỉ khai báo biến isKhacHinhThuc 1 lần tại đây
+      const hinhThucKhacValue = inputKhac.value.trim();
     
-      // Kiểm tra nếu tick vào Khác mà không nhập hoặc nhập <= 2 ký tự
       if (isKhacHinhThuc && hinhThucKhacValue.length <= 2) {
         alert("Vui lòng ghi rõ hình thức khám khác (ít nhất 3 ký tự)!");
-        document.getElementById("hinhThucKhac").focus();
-        
-        // Đổi viền báo đỏ ngay khi bấm submit
-        document.getElementById("hinhThucKhac").classList.add("border-red-500", "focus:border-red-500");
-        document.getElementById("hinhThucKhacError").classList.remove("hidden");
-        
-        return; // Dừng việc gửi form
+        inputKhac.focus();
+        inputKhac.classList.add("border-red-500", "focus:border-red-500");
+        errorKhac.classList.remove("hidden");
+        return;
       }
       
-      // Xử lý Checkbox có chọn ít nhất 1 hình thức khám không (bắt buộc)
+      // 3. Xử lý Checkbox có chọn ít nhất 1 hình thức khám không
       const hinhThucKhamNodes = document.querySelectorAll('input[name="hinhThucKham"]:checked');
-      const isKhacHinhThuc = document.getElementById("chkKhacHinhThuc").checked;
       if (hinhThucKhamNodes.length === 0 && !isKhacHinhThuc) {
         alert("Vui lòng chọn ít nhất một Hình thức khám!");
         return;
       }
 
+      // Xử lý Giao diện nút bấm
       const btn = document.getElementById("submitBtn");
       btn.disabled = true;
       btn.classList.add("opacity-75", "cursor-not-allowed");
       btn.innerText = "Đang xử lý, vui lòng đợi...";
 
-      // Thu thập giá trị Checkbox Tiền sử bệnh
+      // Thu thập giá trị Tiền sử bệnh
       let arrTienSu = Array.from(document.querySelectorAll('input[name="tienSuBenh"]:checked')).map(el => el.value);
       if (document.getElementById("chkKhacBenhLy").checked && document.getElementById("tienSuKhac").value) {
         arrTienSu.push("Khác: " + document.getElementById("tienSuKhac").value);
       }
 
-      // Thu thập giá trị Checkbox Hình thức khám
+      // Thu thập giá trị Hình thức khám
       let arrHinhThuc = Array.from(hinhThucKhamNodes).map(el => el.value);
-      if (isKhacHinhThuc && document.getElementById("hinhThucKhac").value) {
-        arrHinhThuc.push("Khác: " + document.getElementById("hinhThucKhac").value);
+      if (isKhacHinhThuc && hinhThucKhacValue) {
+        arrHinhThuc.push("Khác: " + hinhThucKhacValue);
       }
 
-      // Thu thập giá trị Checkbox Hỗ trợ đặc biệt
       let hoTroNode = document.querySelector('input[name="hoTroDacBiet"]:checked');
 
       // Đọc file thành Base64
@@ -405,9 +381,9 @@
         }
       }
 
-      // Tạo object dữ liệu
+      // Payload dữ liệu
       const payload = {
-        hoTen: document.getElementById("hoTen").value, // UpperCase đã cấu hình trong backend
+        hoTen: document.getElementById("hoTen").value,
         gioiTinh: document.querySelector('input[name="gioiTinh"]:checked')?.value || "",
         ngaySinh: document.getElementById("ngaySinh").value,
         danToc: document.getElementById("danToc").value,
@@ -440,7 +416,6 @@
           body: JSON.stringify(payload)
         });
         
-        // Cảnh báo thành công và reset form
         alert("Gửi thông tin thành công! Cảm ơn Quý vị.");
         document.getElementById("healthForm").reset();
         
@@ -453,7 +428,6 @@
         btn.innerText = "XÁC NHẬN GỬI THÔNG TIN";
       }
     });
-    
   </script>
 </body>
 </html>
