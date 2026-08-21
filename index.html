@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Phiếu thông tin khám sức khỏe năm 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <style>
     input[type="checkbox"], input[type="radio"] {
       accent-color: #1e3a8a;
@@ -53,7 +54,9 @@
 
             <div>
               <label class="block font-semibold mb-1">Ngày tháng năm sinh <span class="text-red-500">*</span></label>
-              <input type="date" id="ngaySinh" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <!-- Ô Ngày sinh -->
+              <input type="text" id="ngaySinh" placeholder="dd/mm/yyyy" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <!-- <input type="date" id="ngaySinh" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none"> -->
             </div>
 
             <div>
@@ -194,7 +197,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block font-semibold mb-1">Ngày khám <span class="text-red-500">*</span></label>
-            <input type="date" id="ngayKham" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <!-- Ô Ngày khám -->
+            <input type="text" id="ngayKham" placeholder="dd/mm/yyyy" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <!-- <input type="date" id="ngayKham" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none"> -->
           </div>
           <div>
             <label class="block font-semibold mb-1">Nơi khám <span class="text-red-500">*</span></label>
@@ -431,6 +436,22 @@
         btn.classList.remove("opacity-75", "cursor-not-allowed");
         btn.innerText = "XÁC NHẬN GỬI THÔNG TIN";
       }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://npmcdn.com/flatpickr/dist/l10n/vn.js"></script>
+  <script>
+    // Kích hoạt bộ chọn lịch Tiếng Việt chuẩn dd/mm/yyyy
+    flatpickr("#ngaySinh", {
+      dateFormat: "d/m/Y",
+      locale: "vn",
+      allowInput: true // Cho phép người dùng gõ phím thay vì bấm lịch
+    });
+  
+    flatpickr("#ngayKham", {
+      dateFormat: "d/m/Y",
+      locale: "vn",
+      allowInput: true
     });
   </script>
 </body>
