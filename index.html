@@ -546,6 +546,7 @@
       }
 
       // Gọi tab in ẩn
+      // 4. Tạo cửa sổ in và đẩy nội dung HTML (CSS mô phỏng mẫu giấy đã tối ưu 1 trang A4)
       const printWindow = window.open('', '_blank');
       const htmlContent = `
         <!DOCTYPE html>
@@ -554,40 +555,45 @@
           <title>In Phiếu Thu Thập Thông Tin</title>
           <style>
             @media print {
-              @page { size: A4; margin: 15mm 15mm 15mm 20mm; }
-              body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+              /* Giảm lề trang giấy để có thêm không gian hiển thị */
+              @page { size: A4; margin: 10mm 15mm 10mm 15mm; }
+              body { -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 0 !important; }
             }
-            body { font-family: 'Times New Roman', Times, serif; font-size: 13pt; line-height: 1.4; color: #000; max-width: 210mm; margin: 0 auto; padding: 20px;}
+            /* Chỉnh lại font chữ 12pt và chiều cao dòng 1.25 để khít hơn */
+            body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.25; color: #000; max-width: 210mm; margin: 0 auto; padding: 10px;}
             .text-center { text-align: center; }
             .font-bold { font-weight: bold; }
             .italic { font-style: italic; }
             .flex { display: flex; }
             .justify-between { justify-content: space-between; }
-            .mt-2 { margin-top: 5px; }
-            .mt-4 { margin-top: 15px; }
-            .mb-2 { margin-bottom: 10px; }
+            .mt-2 { margin-top: 4px; }
+            .mt-4 { margin-top: 10px; }
+            .mb-2 { margin-bottom: 6px; }
             .ml-4 { margin-left: 20px; }
             .ml-8 { margin-left: 40px; }
-            .line-container { display: flex; align-items: flex-end; margin-bottom: 7px; }
-            .dots { flex-grow: 1; border-bottom: 1px dotted #000; margin-left: 5px; position: relative; top: -4px;}
-            .box { border: 1px solid #000; width: 18px; height: 22px; display: inline-block; text-align: center; line-height: 22px; margin-right: 2px; font-size: 13pt;}
-            .check-box { width: 16px; height: 16px; border: 1px solid #000; display: inline-block; text-align: center; line-height: 16px; font-size: 11pt; margin-right: 5px; position: relative; top: 2px; font-weight: bold;}
-            .section-title { font-weight: bold; font-size: 13pt; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;}
-            .sign-area { margin-top: 20px; display: flex; justify-content: flex-end;}
+            .line-container { display: flex; align-items: flex-end; margin-bottom: 5px; }
+            .dots { flex-grow: 1; border-bottom: 1px dotted #000; margin-left: 5px; position: relative; top: -3px;}
+            
+            /* Thu gọn một chút kích thước các ô vuông */
+            .box { border: 1px solid #000; width: 16px; height: 20px; display: inline-block; text-align: center; line-height: 20px; margin-right: 2px; font-size: 11pt;}
+            .check-box { width: 14px; height: 14px; border: 1px solid #000; display: inline-block; text-align: center; line-height: 14px; font-size: 10pt; margin-right: 5px; position: relative; top: 1px; font-weight: bold;}
+            
+            .section-title { font-weight: bold; font-size: 12pt; margin-top: 10px; margin-bottom: 4px; text-transform: uppercase;}
+            .sign-area { margin-top: 10px; display: flex; justify-content: flex-end;}
             .sign-box { text-align: center; }
           </style>
         </head>
         <body>
-          <div class="text-center font-bold" style="font-size: 14pt;">BIỂU MẪU PHIẾU THU THẬP THÔNG TIN</div>
-          <div class="text-center italic">(Kèm theo Công văn số 10592/SYT-NVY ngày 31 tháng 7 năm 2026)</div>
+          <div class="text-center font-bold" style="font-size: 13pt;">BIỂU MẪU PHIẾU THU THẬP THÔNG TIN</div>
+          <div class="text-center italic" style="font-size: 11pt;">(Kèm theo Công văn số 10592/SYT-NVY ngày 31 tháng 7 năm 2026)</div>
           <div class="text-center">*****</div>
 
-          <div class="flex justify-between text-center font-bold mt-2" style="font-size: 12pt;">
+          <div class="flex justify-between text-center font-bold mt-2" style="font-size: 11pt;">
             <div style="width: 40%;">UBND PHƯỜNG<br>PHÚ LỢI</div>
             <div style="width: 60%;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>Độc lập - Tự do - Hạnh phúc</div>
           </div>
 
-          <div class="text-center font-bold mt-4" style="font-size: 13pt; margin-bottom: 15px;">
+          <div class="text-center font-bold mt-4" style="font-size: 12pt; margin-bottom: 10px;">
             PHIẾU THU THẬP THÔNG TIN NGƯỜI DÂN ĐÃ KHÁM SỨC KHỎE<br>HOẶC KHÁM SÀNG LỌC
           </div>
 
@@ -625,7 +631,7 @@
             <div class="ml-8"><span class="check-box">${dtTreDiHoc}</span> Trẻ đi học</div>
             <div class="ml-8"><span class="check-box">${dtTreKhongDiHoc}</span> Trẻ không đi học</div>
             <div class="ml-8"><span class="check-box">${dtSinhVien}</span> Sinh viên, học viên</div>
-            <div class="ml-8"><span class="check-box">${dtLaoDongChinh}</span> Người lao động chính thức <span class="italic">(theo Luật An toàn, Vệ sinh lao động)</span></div>
+            <div class="ml-8"><span class="check-box">${dtLaoDongChinh}</span> Người lao động chính thức <span class="italic" style="font-size: 11pt;">(theo Luật An toàn, Vệ sinh lao động)</span></div>
             <div class="ml-8"><span class="check-box">${dtLaoDongPhi}</span> Người lao động phi chính thức</div>
             <div class="ml-8"><span class="check-box">${dtNguoiCaoTuoi}</span> Người cao tuổi</div>
           </div>
@@ -647,7 +653,7 @@
           <div class="line-container mt-2"><span class="font-bold">2. Ngày khám:</span> <span class="ml-4">${ngayKham}</span><div class="dots"></div></div>
           <div class="line-container"><span class="font-bold">3. Nơi khám:</span> <span class="ml-4">${noiKham}</span><div class="dots"></div></div>
           
-          <div class="mt-2"><span class="font-bold">4. Kết quả khám</span> (ghi theo kết luận của phiếu khám sức khỏe/phiếu khám sàng lọc nếu có):</div>
+          <div class="mt-2"><span class="font-bold">4. Kết quả khám</span> <span style="font-size: 11pt;">(ghi theo kết luận của phiếu khám sức khỏe/phiếu khám sàng lọc nếu có):</span></div>
           <div class="line-container"><span class="ml-4">${ketQuaKham}</span><div class="dots"></div></div>
           <div class="line-container"><div class="dots"></div></div>
 
@@ -656,7 +662,7 @@
               <div class="italic">........., ngày ....... tháng ....... năm 2026</div>
               <div class="font-bold mt-2">Người khai</div>
               <div class="italic">(Ký và ghi rõ họ tên)</div>
-              <div style="margin-top: 70px;" class="font-bold">${hoTen}</div>
+              <div style="margin-top: 50px;" class="font-bold">${hoTen}</div>
             </div>
           </div>
         </body>
