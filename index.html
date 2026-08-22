@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Phiếu thông tin khám sức khỏe năm 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- CSS Flatpickr -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <style>
-    /* Tuỳ chỉnh scrollbar và checkbox */
     input[type="checkbox"], input[type="radio"] {
-      accent-color: #1e3a8a; /* Xanh đậm */
+      accent-color: #1e3a8a;
       width: 1.25rem;
       height: 1.25rem;
     }
@@ -23,12 +21,9 @@
     <!-- Header -->
     <div class="bg-blue-900 text-white text-center py-6 px-4">
       <h2 class="text-sm font-semibold uppercase tracking-wider text-blue-200">Ủy ban nhân dân phường Phú Lợi - Trạm y tế</h2>
-      
-      <!-- Thẻ img Base64 Logo -->
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" 
            alt="Logo Trạm Y Tế" 
            class="h-16 w-auto mx-auto my-4 object-contain">
-           
       <h1 class="text-2xl md:text-3xl font-bold mt-2">Phiếu thông tin khám sức khỏe năm 2026</h1>
     </div>
 
@@ -62,7 +57,6 @@
 
             <div>
               <label class="block font-semibold mb-1">Ngày tháng năm sinh <span class="text-red-500">*</span></label>
-              <!-- Ô Ngày sinh (Đã sửa thành text cho Flatpickr) -->
               <input type="text" id="ngaySinh" placeholder="dd/mm/yyyy" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white">
             </div>
 
@@ -121,9 +115,17 @@
               <input type="text" id="xaPhuongLamViec" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
 
-            <div>
-              <label class="block font-semibold mb-1">Họ tên mẹ hoặc người giám hộ <span class="text-sm font-normal text-gray-500">(đối với trẻ <= 16 tuổi)</span></label>
-              <input type="text" id="nguoiGiamHo" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <div class="bg-yellow-50 p-4 border border-yellow-200 rounded-lg space-y-4">
+              <div>
+                <label class="block font-semibold mb-1">Họ tên mẹ hoặc người giám hộ <span class="text-sm font-normal text-gray-500">(đối với trẻ <= 16 tuổi)</span></label>
+                <input type="text" id="nguoiGiamHo" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white">
+              </div>
+              
+              <div>
+                <label class="block font-semibold mb-1 text-gray-700">Số CCCD người giám hộ <span id="saoCccdGiamHo" class="text-red-500 hidden">*</span></label>
+                <input type="text" id="cccdNguoiGiamHo" maxlength="12" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors bg-white">
+                <p id="cccdGiamHoError" class="text-red-500 text-sm mt-1 hidden">Vui lòng nhập đúng 12 chữ số!</p>
+              </div>
             </div>
 
             <div>
@@ -204,7 +206,6 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block font-semibold mb-1">Ngày khám <span class="text-red-500">*</span></label>
-            <!-- Ô Ngày khám -->
             <input type="text" id="ngayKham" placeholder="dd/mm/yyyy" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white">
           </div>
           <div>
@@ -228,7 +229,7 @@
       <!-- Hai Nút Thao Tác -->
       <div class="pt-6 border-t grid grid-cols-1 md:grid-cols-2 gap-4">
         <button type="button" onclick="printForm()" class="w-full bg-white text-blue-900 border-2 border-blue-900 font-bold text-lg py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg active:scale-95 flex justify-center items-center gap-2">
-          <svg xmlns="http://www.w3.org/-svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
           </svg>
           XUẤT FILE IN (A4)
@@ -248,14 +249,11 @@
 
   </div>
 
-  <!-- Thư viện Javascript Flatpickr -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://npmcdn.com/flatpickr/dist/l10n/vn.js"></script>
 
   <script>
-    // ----------------------------------------------------
-    // 1. CẤU HÌNH BAN ĐẦU & FLATPICKR LỊCH
-    // ----------------------------------------------------
+    // 1. DỮ LIỆU VÀ CẤU HÌNH CƠ BẢN
     const khuPho = ["Chánh Thiện", "Hiệp Thành", "Chánh An", "Phước An", "Phú Thuận", "Phú Hữu", "Chợ Đình", "Phú Bình", "Vinh Sơn", "Phú Văn", "Phú Hoà", "Bình Thoại", "Hoà Thạnh", "Bình Điềm"];
     const danToc = ["Kinh (Việt)","Tày","Thái","Mường","Hoa (Hán)","Khơ-me","Nùng","HMông (Mèo)","Dao","Gia-rai","Ê-đê","Ba-na","Sán Chay","(Cao lan - Sán chỉ)","Chăm (chàm)","Xơ-đăng","Sán Dìu","Hrê","Cơ-ho","Ra-glai","Mnông","Thổ","Xtiêng","Khơmú","Bru-Vân Kiều","Giáy","Cơ-tu","Gié-Triêng","Ta-ôi","Mạ","Co","Chơ-ro","Hà Nhì","Xinh-mun","Chu-ru","Lào","La-chí","Phù Lá","La Hủ","Kháng","Lự","Pà Thẻn","LôLô","Chứt","Mảng","Cờ lao","Bố Y","La Ha","Cống","Ngái","Si La","Pu Péo","Brâu","Rơ-măm","Ơ-đu"];
     
@@ -269,33 +267,23 @@
       dtSelect.innerHTML += `<option value="${danToc[i]}">${danToc[i]}</option>`;
     }
 
-    // Kích hoạt lịch Flatpickr
     flatpickr("#ngaySinh", { dateFormat: "d/m/Y", locale: "vn", allowInput: true });
     flatpickr("#ngayKham", { dateFormat: "d/m/Y", locale: "vn", allowInput: true });
 
-    // URL Web App
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA9HCucg7qHjNmtLHZXMQPchVGg_GDWDmUkMHM4I6-RpTes1IK2VFAfY1dr3MFNpaf/exec";
 
-    // ----------------------------------------------------
-    // 2. LOGIC VALIDATE NGƯỜI DÙNG NHẬP
-    // ----------------------------------------------------
-    // Validate CCCD
+    // 2. VALIDATE CÁC TRƯỜNG DỮ LIỆU
     const cccdInput = document.getElementById("cccd");
     const cccdError = document.getElementById("cccdError");
     
     cccdInput.addEventListener("blur", function() {
       const value = this.value.trim();
-      const cccdRegex = /^\d{12}$/;
-      if (value === "") {
-        clearError(); return;
-      }
-      if (!cccdRegex.test(value)) {
+      if (value === "") { clearError(); return; }
+      if (!/^\d{12}$/.test(value)) {
         this.classList.remove("border-gray-300", "focus:ring-blue-500");
         this.classList.add("border-red-500", "focus:ring-red-500");
         cccdError.classList.remove("hidden");
-      } else {
-        clearError();
-      }
+      } else { clearError(); }
     });
     
     function clearError() {
@@ -305,7 +293,56 @@
     }
     cccdInput.addEventListener("input", clearError);
 
-    // Validate ô "Khác" của Hình thức khám
+    // --- VALIDATE CCCD NGƯỜI GIÁM HỘ ---
+    const nguoiGiamHoInput = document.getElementById("nguoiGiamHo");
+    const cccdGiamHoInput = document.getElementById("cccdNguoiGiamHo");
+    const cccdGiamHoError = document.getElementById("cccdGiamHoError");
+    const saoCccdGiamHo = document.getElementById("saoCccdGiamHo");
+
+    // Hàm kiểm tra xem tên có chứa chữ hoặc số không (bỏ qua nếu chỉ gõ dấu cách hoặc ký tự đặc biệt)
+    function checkGiamHoRequired() {
+      return /[\p{L}\d]/u.test(nguoiGiamHoInput.value); 
+    }
+
+    function clearCccdGiamHoError() {
+      cccdGiamHoInput.classList.remove("border-red-500", "focus:ring-red-500");
+      cccdGiamHoInput.classList.add("border-gray-300", "focus:ring-blue-500");
+      cccdGiamHoError.classList.add("hidden");
+    }
+
+    function validateCccdGiamHo() {
+      if (!checkGiamHoRequired()) {
+        clearCccdGiamHoError();
+        return true;
+      }
+      const value = cccdGiamHoInput.value.trim();
+      if (!/^\d{12}$/.test(value)) {
+        cccdGiamHoInput.classList.remove("border-gray-300", "focus:ring-blue-500");
+        cccdGiamHoInput.classList.add("border-red-500", "focus:ring-red-500");
+        cccdGiamHoError.classList.remove("hidden");
+        return false;
+      }
+      clearCccdGiamHoError();
+      return true;
+    }
+
+    nguoiGiamHoInput.addEventListener("input", function() {
+      if(checkGiamHoRequired()) {
+        saoCccdGiamHo.classList.remove("hidden");
+      } else {
+        saoCccdGiamHo.classList.add("hidden");
+        clearCccdGiamHoError();
+      }
+    });
+
+    cccdGiamHoInput.addEventListener("blur", function() {
+      if (checkGiamHoRequired() || this.value.trim() !== "") {
+        validateCccdGiamHo();
+      }
+    });
+    cccdGiamHoInput.addEventListener("input", clearCccdGiamHoError);
+
+    // Validate Khác (Hình thức khám)
     const chkKhac = document.getElementById("chkKhacHinhThuc");
     const inputKhac = document.getElementById("hinhThucKhac");
     const errorKhac = document.getElementById("hinhThucKhacError");
@@ -320,23 +357,17 @@
       if (chkKhac.checked && this.value.trim().length <= 2) {
         this.classList.add("border-red-500", "focus:border-red-500");
         errorKhac.classList.remove("hidden");
-      } else {
-        clearKhacError();
-      }
+      } else { clearKhacError(); }
     });
     
     inputKhac.addEventListener("input", function() {
       clearKhacError();
-      if (this.value.trim().length > 0 && !chkKhac.checked) {
-        chkKhac.checked = true;
-      }
+      if (this.value.trim().length > 0 && !chkKhac.checked) chkKhac.checked = true;
     });
-    
     chkKhac.addEventListener("change", function() {
-      if (this.checked) { inputKhac.focus(); } else { clearKhacError(); }
+      if (this.checked) inputKhac.focus(); else clearKhacError();
     });
 
-    // Validate Tắt báo lỗi upload file khi đã chọn
     document.getElementById("fileDinhKem").addEventListener("change", function() {
       if (this.files.length > 0) {
         this.classList.remove("border-red-500");
@@ -344,20 +375,21 @@
       }
     });
 
-    // ----------------------------------------------------
     // 3. XỬ LÝ GỬI FORM VÀO GOOGLE SHEETS
-    // ----------------------------------------------------
     document.getElementById("healthForm").addEventListener("submit", async function(e) {
       e.preventDefault();
       
-      // Kiểm tra CCCD
-      const cccdValue = cccdInput.value.trim();
-      if (!/^\d{12}$/.test(cccdValue)) {
+      if (!/^\d{12}$/.test(cccdInput.value.trim())) {
         alert("Số CCCD/Mã định danh không hợp lệ. Vui lòng nhập đúng 12 chữ số!");
         cccdInput.focus(); return;
       }
       
-      // Kiểm tra ô Khác
+      // Chặn submit nếu CCCD Giám hộ không đúng
+      if (checkGiamHoRequired() && !validateCccdGiamHo()) {
+        alert("Số CCCD người giám hộ không hợp lệ. Vui lòng nhập đúng 12 chữ số!");
+        cccdGiamHoInput.focus(); return;
+      }
+      
       const isKhacHinhThuc = chkKhac.checked;
       const hinhThucKhacValue = inputKhac.value.trim();
       if (isKhacHinhThuc && hinhThucKhacValue.length <= 2) {
@@ -368,13 +400,11 @@
         return;
       }
       
-      // Kiểm tra Checkbox Hình thức khám
       const hinhThucKhamNodes = document.querySelectorAll('input[name="hinhThucKham"]:checked');
       if (hinhThucKhamNodes.length === 0 && !isKhacHinhThuc) {
         alert("Vui lòng chọn ít nhất một Hình thức khám!"); return;
       }
 
-      // Kiểm tra File đính kèm
       const fileInput = document.getElementById("fileDinhKem");
       const fileError = document.getElementById("fileError");
       let fileBase64 = null, fileName = null;
@@ -390,26 +420,21 @@
         fileError.classList.add("hidden");
       }
 
-      // Vô hiệu hóa nút trong lúc gửi
       const btn = document.getElementById("submitBtn");
       btn.disabled = true;
       btn.classList.add("opacity-75", "cursor-not-allowed");
       btn.innerText = "Đang xử lý, vui lòng đợi...";
 
-      // Thu thập Checkbox Mảng
       let arrTienSu = Array.from(document.querySelectorAll('input[name="tienSuBenh"]:checked')).map(el => el.value);
       if (document.getElementById("chkKhacBenhLy").checked && document.getElementById("tienSuKhac").value) {
         arrTienSu.push("Khác: " + document.getElementById("tienSuKhac").value);
       }
 
       let arrHinhThuc = Array.from(hinhThucKhamNodes).map(el => el.value);
-      if (isKhacHinhThuc && hinhThucKhacValue) {
-        arrHinhThuc.push("Khác: " + hinhThucKhacValue);
-      }
+      if (isKhacHinhThuc && hinhThucKhacValue) arrHinhThuc.push("Khác: " + hinhThucKhacValue);
 
       let hoTroNode = document.querySelector('input[name="hoTroDacBiet"]:checked');
 
-      // Đọc file -> Base64
       if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
         fileName = file.name;
@@ -429,7 +454,6 @@
         }
       }
 
-      // Tạo Payload
       const payload = {
         hoTen: document.getElementById("hoTen").value,
         gioiTinh: document.querySelector('input[name="gioiTinh"]:checked')?.value || "",
@@ -444,6 +468,7 @@
         noiLamViec: document.getElementById("noiLamViec").value,
         phuongXaLamViec: document.getElementById("xaPhuongLamViec").value,
         nguoiGiamHo: document.getElementById("nguoiGiamHo").value,
+        cccdNguoiGiamHo: document.getElementById("cccdNguoiGiamHo").value, // --- Payload bổ sung CCCD giám hộ
         soDienThoai: document.getElementById("soDienThoai").value,
         doiTuong: document.querySelector('input[name="doiTuong"]:checked')?.value || "",
         tienSu: arrTienSu,
@@ -456,7 +481,6 @@
         fileName: fileName
       };
 
-      // Gửi Fetch API
       try {
         await fetch(SCRIPT_URL, {
           method: "POST",
@@ -467,6 +491,7 @@
         
         alert("Gửi thông tin thành công! Cảm ơn Quý vị.");
         document.getElementById("healthForm").reset();
+        saoCccdGiamHo.classList.add("hidden"); // Reset lại nút sao
       } catch (err) {
         alert("Có lỗi xảy ra trong quá trình gửi mạng, vui lòng thử lại!");
         console.error(err);
@@ -477,17 +502,13 @@
       }
     });
 
-    // ----------------------------------------------------
-    // 4. TÍNH NĂNG XUẤT FILE IN A4
-    // ----------------------------------------------------
+    // 4. XUẤT BẢN IN A4 (Cập nhật CCCD Người giám hộ)
     function printForm() {
-      // Thu thập dữ liệu
       const hoTen = document.getElementById("hoTen").value.toUpperCase();
       const gioiTinh = document.querySelector('input[name="gioiTinh"]:checked')?.value || "";
       const isNam = gioiTinh === "Nam" ? "X" : "&nbsp;&nbsp;";
       const isNu = gioiTinh === "Nữ" ? "X" : "&nbsp;&nbsp;";
 
-      // Flatpickr đã ra sẵn chuẩn dd/mm/yyyy nên không cần cắt chuỗi phức tạp
       const ngaySinh = document.getElementById("ngaySinh").value;
       const ngayKham = document.getElementById("ngayKham").value;
 
@@ -501,6 +522,7 @@
       const noiLamViec = document.getElementById("noiLamViec").value;
       const xaPhuongLamViec = document.getElementById("xaPhuongLamViec").value;
       const nguoiGiamHo = document.getElementById("nguoiGiamHo").value;
+      const cccdNguoiGiamHo = document.getElementById("cccdNguoiGiamHo").value; // Lấy thông tin CCCD giám hộ
       const soDienThoai = document.getElementById("soDienThoai").value;
 
       const doiTuong = document.querySelector('input[name="doiTuong"]:checked')?.value || "";
@@ -540,13 +562,14 @@
       }
       
       const cccdHtml = renderBoxes(cccd, 12);
+      // Hiển thị ra các ô CCCD của người giám hộ
+      const cccdGiamHoHtml = renderBoxes(cccdNguoiGiamHo, 12);
+      
       let bhytHtml = renderBoxes("", 2) + ' <span style="margin: 0 4px; font-weight: bold;">-</span> ' + renderBoxes("", 13);
       if(bhyt.length > 0) {
         bhytHtml = renderBoxes(bhyt.substring(0,2), 2) + ' <span style="margin: 0 4px; font-weight: bold;">-</span> ' + renderBoxes(bhyt.substring(2,15), 13);
       }
 
-      // Gọi tab in ẩn
-      // 4. Tạo cửa sổ in và đẩy nội dung HTML (CSS mô phỏng mẫu giấy đã tối ưu 1 trang A4)
       const printWindow = window.open('', '_blank');
       const htmlContent = `
         <!DOCTYPE html>
@@ -555,11 +578,9 @@
           <title>In Phiếu Thu Thập Thông Tin</title>
           <style>
             @media print {
-              /* Giảm lề trang giấy để có thêm không gian hiển thị */
               @page { size: A4; margin: 10mm 15mm 10mm 15mm; }
               body { -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 0 !important; }
             }
-            /* Chỉnh lại font chữ 12pt và chiều cao dòng 1.25 để khít hơn */
             body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.25; color: #000; max-width: 210mm; margin: 0 auto; padding: 10px;}
             .text-center { text-align: center; }
             .font-bold { font-weight: bold; }
@@ -573,11 +594,8 @@
             .ml-8 { margin-left: 40px; }
             .line-container { display: flex; align-items: flex-end; margin-bottom: 5px; }
             .dots { flex-grow: 1; border-bottom: 1px dotted #000; margin-left: 5px; position: relative; top: -3px;}
-            
-            /* Thu gọn một chút kích thước các ô vuông */
             .box { border: 1px solid #000; width: 16px; height: 20px; display: inline-block; text-align: center; line-height: 20px; margin-right: 2px; font-size: 11pt;}
             .check-box { width: 14px; height: 14px; border: 1px solid #000; display: inline-block; text-align: center; line-height: 14px; font-size: 10pt; margin-right: 5px; position: relative; top: 1px; font-weight: bold;}
-            
             .section-title { font-weight: bold; font-size: 12pt; margin-top: 10px; margin-bottom: 4px; text-transform: uppercase;}
             .sign-area { margin-top: 10px; display: flex; justify-content: flex-end;}
             .sign-box { text-align: center; }
@@ -623,7 +641,10 @@
           <div class="line-container">10. Nơi làm việc, học tập: <span class="ml-4">${noiLamViec}</span><div class="dots"></div></div>
           <div class="line-container ml-8">Xã, phường: <span class="ml-4">${xaPhuongLamViec}</span><div class="dots"></div></div>
           <div class="line-container">11. Họ tên mẹ hoặc người giám hộ (đối với trẻ từ 16 tuổi trở xuống): <span class="ml-4">${nguoiGiamHo}</span><div class="dots"></div></div>
-          <div class="mb-2 ml-8">Số CCCD: ${renderBoxes("", 12)}</div>
+          
+          <!-- Bổ sung phần in CCCD người giám hộ -->
+          <div class="mb-2 ml-8">Số CCCD: <span class="ml-2">${cccdGiamHoHtml}</span></div>
+          
           <div class="line-container">12. Điện thoại di động: <span class="ml-4">${soDienThoai}</span><div class="dots"></div></div>
 
           <div class="mt-2">
@@ -672,7 +693,6 @@
       printWindow.document.write(htmlContent);
       printWindow.document.close();
       
-      // Chờ trình duyệt xử lý HTML/CSS trong 0.5s rồi gọi In
       setTimeout(() => {
         printWindow.focus();
         printWindow.print();
