@@ -213,8 +213,13 @@
         </div>
 
         <div class="mt-6">
-          <label class="block font-semibold mb-1">File đính kèm <span class="text-sm font-normal text-gray-500">(ảnh chụp phiếu khám/kết quả nếu có)</span></label>
-          <input type="file" id="fileDinhKem" accept="image/*,application/pdf" class="w-full border border-gray-300 rounded-lg p-2 cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200">
+          <!-- Bỏ chữ 'nếu có' và thêm dấu * màu đỏ -->
+          <label class="block font-semibold mb-1">File đính kèm <span class="text-sm font-normal text-gray-500">(ảnh chụp phiếu khám/kết quả)</span> <span class="text-red-500">*</span></label>
+          
+          <!-- Thêm thuộc tính required vào thẻ input -->
+          <input type="file" id="fileDinhKem" accept="image/*,application/pdf" required class="w-full border border-gray-300 rounded-lg p-2 cursor-pointer bg-gray-50 focus:ring-2 focus:ring-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 transition-colors">
+          
+          <p id="fileError" class="text-red-500 text-sm mt-1 hidden">Vui lòng tải lên ít nhất 1 file đính kèm!</p>
         </div>
       </section>
 
@@ -315,8 +320,14 @@
         clearKhacError();
       }
     });
+    document.getElementById("fileDinhKem").addEventListener("change", function() {
+      if (this.files.length > 0) {
+        this.classList.remove("border-red-500");
+        document.getElementById("fileError").classList.add("hidden");
+      }
+    });
     
-    // XỬ LÝ GỬI FORM (ĐÃ SỬA LỖI TRÙNG BIẾN CONST)
+    // XỬ LÝ GỬI FORM 
     document.getElementById("healthForm").addEventListener("submit", async function(e) {
       e.preventDefault();
       
@@ -367,10 +378,25 @@
       }
 
       let hoTroNode = document.querySelector('input[name="hoTroDacBiet"]:checked');
+      // 4. KIỂM TRA BẮT BUỘC UPLOAD FILE (THÊM MỚI VÀO ĐÂY)
+      const fileInput = document.getElementById("fileDinhKem");
+      const fileError = document.getElementById("fileError");
+      let fileBase64 = null, fileName = null;
+      
+      if (fileInput.files.length === 0) {
+        alert("Vui lòng đính kèm file ảnh chụp phiếu khám hoặc kết quả!");
+        fileInput.classList.add("border-red-500");
+        fileError.classList.remove("hidden");
+        
+        // Cuộn trang xuống chỗ upload file để người dùng dễ thấy
+        fileInput.scrollIntoView({ behavior: "smooth", block: "center" });
+        return; // Dừng việc gửi form
+      } else {
+        fileInput.classList.remove("border-red-500");
+        fileError.classList.add("hidden");
+      }
 
       // Đọc file thành Base64
-      let fileBase64 = null, fileName = null;
-      const fileInput = document.getElementById("fileDinhKem");
       if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
         fileName = file.name;
