@@ -40,7 +40,6 @@
         <h3 class="text-xl font-bold text-blue-900 border-b-2 border-blue-900 pb-2 mb-6">I. Thông tin hành chính</h3>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Cột 1 -->
           <div class="space-y-6">
             <div>
               <label class="block font-semibold mb-1">Họ và tên (viết chữ in hoa) <span class="text-red-500">*</span></label>
@@ -86,7 +85,6 @@
             </div>
           </div>
 
-          <!-- Cột 2 -->
           <div class="space-y-6">
             <div>
               <label class="block font-semibold mb-1">Số nhà, đường (nơi ở hiện tại) <span class="text-red-500">*</span></label>
@@ -253,7 +251,6 @@
   <script src="https://npmcdn.com/flatpickr/dist/l10n/vn.js"></script>
 
   <script>
-    // 1. DỮ LIỆU VÀ CẤU HÌNH CƠ BẢN
     const khuPho = ["Chánh Thiện", "Hiệp Thành", "Chánh An", "Phước An", "Phú Thuận", "Phú Hữu", "Chợ Đình", "Phú Bình", "Vinh Sơn", "Phú Văn", "Phú Hoà", "Bình Thoại", "Hoà Thạnh", "Bình Điềm"];
     const danToc = ["Kinh (Việt)","Tày","Thái","Mường","Hoa (Hán)","Khơ-me","Nùng","HMông (Mèo)","Dao","Gia-rai","Ê-đê","Ba-na","Sán Chay","(Cao lan - Sán chỉ)","Chăm (chàm)","Xơ-đăng","Sán Dìu","Hrê","Cơ-ho","Ra-glai","Mnông","Thổ","Xtiêng","Khơmú","Bru-Vân Kiều","Giáy","Cơ-tu","Gié-Triêng","Ta-ôi","Mạ","Co","Chơ-ro","Hà Nhì","Xinh-mun","Chu-ru","Lào","La-chí","Phù Lá","La Hủ","Kháng","Lự","Pà Thẻn","LôLô","Chứt","Mảng","Cờ lao","Bố Y","La Ha","Cống","Ngái","Si La","Pu Péo","Brâu","Rơ-măm","Ơ-đu"];
     
@@ -272,7 +269,7 @@
 
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA9HCucg7qHjNmtLHZXMQPchVGg_GDWDmUkMHM4I6-RpTes1IK2VFAfY1dr3MFNpaf/exec";
 
-    // 2. VALIDATE CÁC TRƯỜNG DỮ LIỆU
+    // Validate CCCD
     const cccdInput = document.getElementById("cccd");
     const cccdError = document.getElementById("cccdError");
     
@@ -293,13 +290,12 @@
     }
     cccdInput.addEventListener("input", clearError);
 
-    // --- VALIDATE CCCD NGƯỜI GIÁM HỘ ---
+    // Validate CCCD Người giám hộ
     const nguoiGiamHoInput = document.getElementById("nguoiGiamHo");
     const cccdGiamHoInput = document.getElementById("cccdNguoiGiamHo");
     const cccdGiamHoError = document.getElementById("cccdGiamHoError");
     const saoCccdGiamHo = document.getElementById("saoCccdGiamHo");
 
-    // Hàm kiểm tra xem tên có chứa chữ hoặc số không (bỏ qua nếu chỉ gõ dấu cách hoặc ký tự đặc biệt)
     function checkGiamHoRequired() {
       return /[\p{L}\d]/u.test(nguoiGiamHoInput.value); 
     }
@@ -342,7 +338,7 @@
     });
     cccdGiamHoInput.addEventListener("input", clearCccdGiamHoError);
 
-    // Validate Khác (Hình thức khám)
+    // Validate Khác
     const chkKhac = document.getElementById("chkKhacHinhThuc");
     const inputKhac = document.getElementById("hinhThucKhac");
     const errorKhac = document.getElementById("hinhThucKhacError");
@@ -375,7 +371,6 @@
       }
     });
 
-    // 3. XỬ LÝ GỬI FORM VÀO GOOGLE SHEETS
     document.getElementById("healthForm").addEventListener("submit", async function(e) {
       e.preventDefault();
       
@@ -384,7 +379,6 @@
         cccdInput.focus(); return;
       }
       
-      // Chặn submit nếu CCCD Giám hộ không đúng
       if (checkGiamHoRequired() && !validateCccdGiamHo()) {
         alert("Số CCCD người giám hộ không hợp lệ. Vui lòng nhập đúng 12 chữ số!");
         cccdGiamHoInput.focus(); return;
@@ -468,7 +462,7 @@
         noiLamViec: document.getElementById("noiLamViec").value,
         phuongXaLamViec: document.getElementById("xaPhuongLamViec").value,
         nguoiGiamHo: document.getElementById("nguoiGiamHo").value,
-        cccdNguoiGiamHo: document.getElementById("cccdNguoiGiamHo").value, // --- Payload bổ sung CCCD giám hộ
+        cccdNguoiGiamHo: document.getElementById("cccdNguoiGiamHo").value, 
         soDienThoai: document.getElementById("soDienThoai").value,
         doiTuong: document.querySelector('input[name="doiTuong"]:checked')?.value || "",
         tienSu: arrTienSu,
@@ -491,7 +485,7 @@
         
         alert("Gửi thông tin thành công! Cảm ơn Quý vị.");
         document.getElementById("healthForm").reset();
-        saoCccdGiamHo.classList.add("hidden"); // Reset lại nút sao
+        saoCccdGiamHo.classList.add("hidden");
       } catch (err) {
         alert("Có lỗi xảy ra trong quá trình gửi mạng, vui lòng thử lại!");
         console.error(err);
@@ -502,7 +496,7 @@
       }
     });
 
-    // 4. XUẤT BẢN IN A4 (Cập nhật CCCD Người giám hộ)
+    // XUẤT BẢN IN A4 (ĐÃ TỐI ƯU CỰC GỌN ĐỂ CHẮC CHẮN NẰM TRONG 1 TRANG)
     function printForm() {
       const hoTen = document.getElementById("hoTen").value.toUpperCase();
       const gioiTinh = document.querySelector('input[name="gioiTinh"]:checked')?.value || "";
@@ -522,7 +516,7 @@
       const noiLamViec = document.getElementById("noiLamViec").value;
       const xaPhuongLamViec = document.getElementById("xaPhuongLamViec").value;
       const nguoiGiamHo = document.getElementById("nguoiGiamHo").value;
-      const cccdNguoiGiamHo = document.getElementById("cccdNguoiGiamHo").value; // Lấy thông tin CCCD giám hộ
+      const cccdNguoiGiamHo = document.getElementById("cccdNguoiGiamHo").value; 
       const soDienThoai = document.getElementById("soDienThoai").value;
 
       const doiTuong = document.querySelector('input[name="doiTuong"]:checked')?.value || "";
@@ -562,7 +556,6 @@
       }
       
       const cccdHtml = renderBoxes(cccd, 12);
-      // Hiển thị ra các ô CCCD của người giám hộ
       const cccdGiamHoHtml = renderBoxes(cccdNguoiGiamHo, 12);
       
       let bhytHtml = renderBoxes("", 2) + ' <span style="margin: 0 4px; font-weight: bold;">-</span> ' + renderBoxes("", 13);
@@ -578,32 +571,36 @@
           <title>In Phiếu Thu Thập Thông Tin</title>
           <style>
             @media print {
-              @page { size: A4; margin: 10mm 15mm 10mm 15mm; }
+              @page { size: A4; margin: 8mm 12mm 8mm 12mm; } /* Lề thu gọn mức tối đa */
               body { -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 0 !important; }
             }
-            body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.25; color: #000; max-width: 210mm; margin: 0 auto; padding: 10px;}
+            body { font-family: 'Times New Roman', Times, serif; font-size: 11.5pt; line-height: 1.2; color: #000; max-width: 210mm; margin: 0 auto; padding: 10px;}
             .text-center { text-align: center; }
             .font-bold { font-weight: bold; }
             .italic { font-style: italic; }
-            .flex { display: flex; }
+            .flex { display: flex; flex-wrap: wrap; }
+            .w-50 { width: 50%; margin-bottom: 3px; }
             .justify-between { justify-content: space-between; }
             .mt-2 { margin-top: 4px; }
-            .mt-4 { margin-top: 10px; }
-            .mb-2 { margin-bottom: 6px; }
-            .ml-4 { margin-left: 20px; }
-            .ml-8 { margin-left: 40px; }
-            .line-container { display: flex; align-items: flex-end; margin-bottom: 5px; }
+            .mt-4 { margin-top: 8px; }
+            .mb-2 { margin-bottom: 4px; }
+            .ml-4 { margin-left: 15px; }
+            .ml-8 { margin-left: 30px; }
+            .line-container { display: flex; align-items: flex-end; margin-bottom: 3px; }
             .dots { flex-grow: 1; border-bottom: 1px dotted #000; margin-left: 5px; position: relative; top: -3px;}
-            .box { border: 1px solid #000; width: 16px; height: 20px; display: inline-block; text-align: center; line-height: 20px; margin-right: 2px; font-size: 11pt;}
-            .check-box { width: 14px; height: 14px; border: 1px solid #000; display: inline-block; text-align: center; line-height: 14px; font-size: 10pt; margin-right: 5px; position: relative; top: 1px; font-weight: bold;}
-            .section-title { font-weight: bold; font-size: 12pt; margin-top: 10px; margin-bottom: 4px; text-transform: uppercase;}
-            .sign-area { margin-top: 10px; display: flex; justify-content: flex-end;}
+            
+            /* Box nhỏ hơn */
+            .box { border: 1px solid #000; width: 14px; height: 18px; display: inline-block; text-align: center; line-height: 18px; margin-right: 2px; font-size: 11pt;}
+            .check-box { width: 12px; height: 12px; border: 1px solid #000; display: inline-block; text-align: center; line-height: 12px; font-size: 9pt; margin-right: 5px; position: relative; top: 1px; font-weight: bold;}
+            
+            .section-title { font-weight: bold; font-size: 11pt; margin-top: 8px; margin-bottom: 2px; text-transform: uppercase;}
+            .sign-area { margin-top: 5px; display: flex; justify-content: flex-end;}
             .sign-box { text-align: center; }
           </style>
         </head>
         <body>
-          <div class="text-center font-bold" style="font-size: 13pt;">BIỂU MẪU PHIẾU THU THẬP THÔNG TIN</div>
-          <div class="text-center italic" style="font-size: 11pt;">(Kèm theo Công văn số 10592/SYT-NVY ngày 31 tháng 7 năm 2026)</div>
+          <div class="text-center font-bold" style="font-size: 12.5pt;">BIỂU MẪU PHIẾU THU THẬP THÔNG TIN</div>
+          <div class="text-center italic" style="font-size: 10.5pt;">(Kèm theo Công văn số 10592/SYT-NVY ngày 31 tháng 7 năm 2026)</div>
           <div class="text-center">*****</div>
 
           <div class="flex justify-between text-center font-bold mt-2" style="font-size: 11pt;">
@@ -611,7 +608,7 @@
             <div style="width: 60%;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>Độc lập - Tự do - Hạnh phúc</div>
           </div>
 
-          <div class="text-center font-bold mt-4" style="font-size: 12pt; margin-bottom: 10px;">
+          <div class="text-center font-bold mt-4" style="font-size: 11.5pt; margin-bottom: 6px;">
             PHIẾU THU THẬP THÔNG TIN NGƯỜI DÂN ĐÃ KHÁM SỨC KHỎE<br>HOẶC KHÁM SÀNG LỌC
           </div>
 
@@ -640,41 +637,44 @@
           <div class="line-container">9. Nghề nghiệp: <span class="ml-4">${ngheNghiep}</span><div class="dots"></div></div>
           <div class="line-container">10. Nơi làm việc, học tập: <span class="ml-4">${noiLamViec}</span><div class="dots"></div></div>
           <div class="line-container ml-8">Xã, phường: <span class="ml-4">${xaPhuongLamViec}</span><div class="dots"></div></div>
-          <div class="line-container">11. Họ tên mẹ hoặc người giám hộ (đối với trẻ từ 16 tuổi trở xuống): <span class="ml-4">${nguoiGiamHo}</span><div class="dots"></div></div>
-          
-          <!-- Bổ sung phần in CCCD người giám hộ -->
+          <div class="line-container">11. Họ tên mẹ hoặc người giám hộ <span style="font-size: 10.5pt;">(đối với trẻ <= 16 tuổi)</span>: <span class="ml-4">${nguoiGiamHo}</span><div class="dots"></div></div>
           <div class="mb-2 ml-8">Số CCCD: <span class="ml-2">${cccdGiamHoHtml}</span></div>
-          
           <div class="line-container">12. Điện thoại di động: <span class="ml-4">${soDienThoai}</span><div class="dots"></div></div>
 
           <div class="mt-2">
             13. Đối tượng:
-            <div class="ml-8"><span class="check-box">${dtTreDiHoc}</span> Trẻ đi học</div>
-            <div class="ml-8"><span class="check-box">${dtTreKhongDiHoc}</span> Trẻ không đi học</div>
-            <div class="ml-8"><span class="check-box">${dtSinhVien}</span> Sinh viên, học viên</div>
-            <div class="ml-8"><span class="check-box">${dtLaoDongChinh}</span> Người lao động chính thức <span class="italic" style="font-size: 11pt;">(theo Luật An toàn, Vệ sinh lao động)</span></div>
-            <div class="ml-8"><span class="check-box">${dtLaoDongPhi}</span> Người lao động phi chính thức</div>
-            <div class="ml-8"><span class="check-box">${dtNguoiCaoTuoi}</span> Người cao tuổi</div>
+            <!-- CHIA 2 CỘT GRID ĐỂ TIẾT KIỆM DIỆN TÍCH -->
+            <div class="flex" style="margin-top: 4px; margin-left: 20px;">
+              <div class="w-50"><span class="check-box">${dtTreDiHoc}</span> Trẻ đi học</div>
+              <div class="w-50"><span class="check-box">${dtLaoDongChinh}</span> Người lao động chính thức</div>
+              <div class="w-50"><span class="check-box">${dtTreKhongDiHoc}</span> Trẻ không đi học</div>
+              <div class="w-50"><span class="check-box">${dtLaoDongPhi}</span> Người lao động phi chính thức</div>
+              <div class="w-50"><span class="check-box">${dtSinhVien}</span> Sinh viên, học viên</div>
+              <div class="w-50"><span class="check-box">${dtNguoiCaoTuoi}</span> Người cao tuổi</div>
+            </div>
           </div>
 
           <div class="section-title">B. THÔNG TIN VỀ KHÁM SỨC KHỎE HOẶC KHÁM SÀNG LỌC</div>
 
           <div class="font-bold">1. Hình thức khám</div>
-          <div class="ml-4"><span class="check-box">${htTongQuat}</span> Khám sức khỏe tổng quát</div>
-          <div class="ml-4"><span class="check-box">${htSangLoc}</span> Khám sàng lọc bệnh, ghi rõ:</div>
-          <div class="ml-8"><span class="check-box">${slCoTuCung}</span> Ung thư cổ tử cung</div>
-          <div class="ml-8"><span class="check-box">${slVu}</span> Ung thư vú</div>
-          <div class="ml-8"><span class="check-box">${slGan}</span> Ung thư gan</div>
-          <div class="ml-8"><span class="check-box">${slDaiTrucTrang}</span> Ung thư đại trực tràng</div>
-          <div class="ml-8"><span class="check-box">${slTienLietTuyen}</span> Ung thư tiền liệt tuyến</div>
-          <div class="line-container ml-8">
-            <span class="check-box">${slKhac}</span> Khác, ghi rõ: <span class="ml-4">${txtKhac}</span><div class="dots"></div>
+          <!-- CHIA 2 CỘT GRID ĐỂ TIẾT KIỆM DIỆN TÍCH -->
+          <div class="flex" style="margin-top: 4px; margin-left: 20px;">
+            <div class="w-50"><span class="check-box">${htTongQuat}</span> Khám sức khỏe tổng quát</div>
+            <div class="w-50"><span class="check-box">${slCoTuCung}</span> Sàng lọc - UT Cổ tử cung</div>
+            <div class="w-50"><span class="check-box">${htSangLoc}</span> Khám sàng lọc bệnh, ghi rõ:</div>
+            <div class="w-50"><span class="check-box">${slVu}</span> Sàng lọc - UT Vú</div>
+            <div class="w-50"><span class="check-box">${slGan}</span> Sàng lọc - UT Gan</div>
+            <div class="w-50"><span class="check-box">${slDaiTrucTrang}</span> Sàng lọc - UT Đại trực tràng</div>
+            <div class="w-50"><span class="check-box">${slTienLietTuyen}</span> Sàng lọc - UT Tiền liệt tuyến</div>
+          </div>
+          <div class="line-container ml-8 mt-2">
+            <span class="check-box">${slKhac}</span> Khác, ghi rõ: <span class="ml-2">${txtKhac}</span><div class="dots"></div>
           </div>
 
           <div class="line-container mt-2"><span class="font-bold">2. Ngày khám:</span> <span class="ml-4">${ngayKham}</span><div class="dots"></div></div>
           <div class="line-container"><span class="font-bold">3. Nơi khám:</span> <span class="ml-4">${noiKham}</span><div class="dots"></div></div>
           
-          <div class="mt-2"><span class="font-bold">4. Kết quả khám</span> <span style="font-size: 11pt;">(ghi theo kết luận của phiếu khám sức khỏe/phiếu khám sàng lọc nếu có):</span></div>
+          <div class="mt-2"><span class="font-bold">4. Kết quả khám</span> <span style="font-size: 10.5pt;">(ghi theo kết luận của phiếu khám sức khỏe/phiếu khám sàng lọc nếu có):</span></div>
           <div class="line-container"><span class="ml-4">${ketQuaKham}</span><div class="dots"></div></div>
           <div class="line-container"><div class="dots"></div></div>
 
@@ -683,7 +683,7 @@
               <div class="italic">........., ngày ....... tháng ....... năm 2026</div>
               <div class="font-bold mt-2">Người khai</div>
               <div class="italic">(Ký và ghi rõ họ tên)</div>
-              <div style="margin-top: 50px;" class="font-bold">${hoTen}</div>
+              <div style="margin-top: 40px;" class="font-bold">${hoTen}</div>
             </div>
           </div>
         </body>
